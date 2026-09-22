@@ -18,8 +18,22 @@ namespace TASK_4
         {
             this.id = id;
             this.name = name;
-            this.price = price;
-            this.quantity = quantity;
+            if (price > 0)
+            {
+                this.price = price;
+            }
+            else
+            {
+                throw new ArgumentException("Price must be greater than 0");
+            }
+            if (quantity >= 0)
+            {
+                this.quantity = quantity;
+            }
+            else
+            {
+                throw new ArgumentException("quantiy must be 0 or greater");
+            }
         }
     }
 }
