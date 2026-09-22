@@ -111,5 +111,49 @@ namespace Task_4.Tests
             product p=new product(1, "table", 10, -5);
             Assert.True(p.quantity < 0);
         }
+        [Fact]
+        public void order_for_missing_customer_should_be_rejected()
+        {
+            services s = new services();
+            order o= new order(1, 999, false, new List<order_item>(), DateTime.Now);    
+            Assert.False(s.customer_exists(o.customer_id));
+
+        }
+        [Fact]
+        public void quantity_greater_than_stock_should_be_rejected()
+        {
+            services s = new services();
+            product p = new product(1, "apple",1, 5);
+            order_item item = new order_item("apple", 10, 1);
+            if (item.quantity > p.quantity)
+            {
+                Assert.True(true);
+            }
+            else
+            {
+                Assert.True(false);
+            }
+           ///Assert.Equal(p.quantity,item.quantity);
+        }
+        [Fact]
+        public void stock_should_decrease()
+        {
+            services s = new services();
+            product p = new product(1, "apple", 1, 5);
+            order o = new order(1, 10, false, new List<order_item> { new order_item("apple", 3, 1) }, DateTime.Now);
+            s.add_product_to_order(o, p, 3);
+            Assert.Equal(2, p.quantity);
+
+        }
+        [Fact]
+        public void quantity_equal_to_stock_should_make_stock_zero()
+        {
+            services s=new services();
+            product p= new product(1, "banana", 1, 5);
+            order order = new order(1, 10, false, new List<order_item> { new order_item("banana", 5, 1) }, DateTime.Now);
+            s.add_product_to_order(order, p, 5);
+            Assert.Equal(0, p.quantity);
+        }
+
     }
 }

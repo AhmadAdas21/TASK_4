@@ -353,5 +353,21 @@ namespace TASK_4
         {
             return (order != null &&order.order_items != null &&order.order_items.Count > 0);
         }
+        public bool customer_exists(int customer_id)
+        {
+            return customers.Any(c => c.id == customer_id);
+        }
+        public void add_product_to_order(order o, product p, int quant)
+        {
+            if (quant <= 0 || quant > p.quantity)
+            {
+                return;
+            }
+
+            order_item item = new order_item(p.name, quant, p.price);
+
+            o.order_items.Add(item);
+            p.quantity -= quant;
+        }
     }
 }
