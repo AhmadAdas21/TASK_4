@@ -89,38 +89,38 @@ namespace Task_4.Tests
             Assert.Equal(0, total);
         }
         [Fact]
-         public void adding_quantity_equal_to_stock_should_succeed_and_make_stock_zero()
+        public void adding_quantity_equal_to_stock_should_succeed_and_make_stock_zero()
         {
-
+           
+            services s = new services();
             product p = new product(1, "desk", 10, 5);
-            customer c=new customer(1, "ahmad", "ahmad@");
-            List<order_item> items = new List<order_item>()
-           {
-               new order_item(p, 5, 10)
-           };
+            customer c = new customer(1, "ahmad", "ahmad@gmail.com");
+
+            order o = new order(1,c,false,new List<order_item>(),DateTime.Now);
 
            
-            services ser = new services();
-            order or = new order(1,c, false, items, DateTime.Now);
-            Assert.Equal(5, p.quantity);
+            s.add_product_to_order(o, p, 5);
+            Assert.Equal(0, p.quantity);
+            Assert.Single(o.order_items);
 
+            order_item item = o.order_items[0];
 
+            Assert.Same(p, item.product);
+            Assert.Equal(5, item.quantity);
+            Assert.Equal(10f, item.unit_price);
         }
         [Fact]
         public void negative_product_price_should_be_rejected()
         {
-            services s = new services();
-            product p = new product(1, "chair", -10, 5);
-            Assert.True(p.price < 0);
+            Assert.Throws<ArgumentException>(() =>new product(1, "chair", -10, 5));
         }
+
         [Fact]
         public void negative_product_stock_should_be_rejected()
         {
-            services s = new services();
-            product p=new product(1, "table", 10, -5);
-            Assert.True(p.quantity < 0);
+            Assert.Throws<ArgumentException>(() =>new product(1, "table", 10, -5));
         }
-         [Fact]
+        [Fact]
         public void missing_customer_should_not_exist()
         {
             services s = new services();
@@ -130,7 +130,27 @@ namespace Task_4.Tests
             Assert.False(result);
         }
         [Fact]
+        
         public void quantity_greater_than_stock_should_be_rejected()
+        {
+            // Arrange
+            services s = new services();
+            product p = new product(1, "apple", 1, 5);
+            customer c = new customer(1, "ahmad", "ahmad@gmail.com");
+
+            order o = new order(
+                1, c, false, new List<order_item>(), DateTime.Now
+            );
+
+            
+            s.add_product_to_order(o, p, 10);
+
+            
+            Assert.Empty(o.order_items);
+            Assert.Equal(5, p.quantity);
+      
+        }
+        /*public void quantity_greater_than_stock_should_be_rejected()
         {
             services s = new services();
             product p = new product(1, "apple",1, 5);
@@ -145,16 +165,34 @@ namespace Task_4.Tests
             }
            ///Assert.Equal(p.quantity,item.quantity);
         }
+        */
+        /*  [Fact]
+          public void stock_should_decrease()
+          {
+              services s = new services();
+              customer c = new customer(2,"ahmad","ahmad@gmail");
+              product p = new product(1, "apple", 1, 5);
+              order o = new order(1, c, false, new List<order_item> { new order_item(p, 3, 1) }, DateTime.Now);
+              s.add_product_to_order(o, p, 3);
+              Assert.Equal(2, p.quantity);
+
+          }*/
         [Fact]
         public void stock_should_decrease()
         {
+            // Arrange
             services s = new services();
-            customer c = new customer(2,"ahmad","ahmad@gmail");
+            customer c = new customer(2, "ahmad", "ahmad@gmail.com");
             product p = new product(1, "apple", 1, 5);
-            order o = new order(1, c, false, new List<order_item> { new order_item(p, 3, 1) }, DateTime.Now);
-            s.add_product_to_order(o, p, 3);
-            Assert.Equal(2, p.quantity);
 
+            order o = new order(1,c,false, new List<order_item>(), DateTime.Now);
+            s.add_product_to_order(o, p, 3);
+
+           
+            Assert.Equal(2, p.quantity);
+            Assert.Single(o.order_items);
+            Assert.Equal(3, o.order_items[0].quantity);
+            Assert.Same(p, o.order_items[0].product);
         }
         [Fact]
         public void quantity_equal_to_stock_should_make_stock_zero()

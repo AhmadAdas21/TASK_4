@@ -179,14 +179,73 @@ namespace TASK_4
                     Console.WriteLine("invalid input, please enter a valid status");
                 }
             }
-            customer customer =customers.FirstOrDefault(c => c.id == customer_id);
-            DateTime noww = DateTime.Now;
-            order o = new order( idd,customer,status,new List<order_item>(),noww);
+            customer customer = customers.FirstOrDefault(c => c.id == customer_id);
 
+            if (!products.Any(p => p.quantity > 0))
+            {
+                Console.WriteLine("no products available in stock");
+                return;
+            }
+
+            Console.WriteLine("you must add at least one product to the order");
+            Console.WriteLine("enter the product id");
+
+            int product_id;
+
+            while (!int.TryParse(Console.ReadLine(), out product_id))
+            {
+                Console.WriteLine("invalid input, please enter a valid product id");
+            }
+
+            product selected_product = products.FirstOrDefault(p => p.id == product_id);
+
+            if (selected_product == null)
+            {
+                Console.WriteLine("product not found, order was not created");
+                return;
+            }
+
+            Console.WriteLine("enter the quantity");
+
+            int quant;
+
+            while (!int.TryParse(Console.ReadLine(), out quant) || quant <= 0)
+            {
+                Console.WriteLine("invalid input, please enter a positive quantity");
+            }
+
+            if (quant > selected_product.quantity)
+            {
+                Console.WriteLine("not enough stock, order was not created");
+                return;
+            }
+
+         
+            order o = new order(
+                idd,
+                customer,
+                false,
+                new List<order_item>(),
+                DateTime.Now
+            );
+
+           
+            add_product_to_order(o, selected_product, quant);
+
+          
+            if (!can_complete_order(o))
+            {
+                Console.WriteLine("order must contain at least one product");
+                return;
+            }
+
+            o.status = status;
             orders.Add(o);
-          //  Console.WriteLine(o.customer.id);
 
             Console.WriteLine("order created successfully");
+            //  Console.WriteLine(o.customer.id);
+
+        //    Console.WriteLine("order created successfully");
 
         }
      public  void add_product_to_order()
