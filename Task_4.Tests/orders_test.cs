@@ -20,33 +20,33 @@ namespace Task_4.Tests
                 new order_item("Mouse", 3, 50)
             };
 
-            order selected_order = new order(1, 10, false, items, DateTime.Now);
+            order _order = new order(1, 10, false, items, DateTime.Now);
 
 
-            float result = service.get_order_total(selected_order);
+            float actual = service.get_order_total(_order);
 
 
-            Assert.Equal(2150, result);
+            Assert.Equal(2150, actual);
         }
 
         [Fact]
         public void new_order_has_correct_customer_id()
         {
 
-            order selected_order = new order(1, 25, false, new List<order_item>(), DateTime.Now);
+           order order = new order(1, 25, false, new List<order_item>(), DateTime.Now);
+           int actual_id = order.customer_id;
 
-
-            Assert.Equal(25, selected_order.customer_id);
+            Assert.Equal(25, actual_id);
         }
 
         [Fact]
         public void new_order_starts_with_empty_items_list()
         {
 
-            order selected_order = new order(1, 25, false, new List<order_item>(), DateTime.Now);
+            order order = new order(1, 25, false, new List<order_item>(), DateTime.Now);
 
 
-            Assert.Empty(selected_order.order_items);
+            Assert.Empty(order.order_items);
         }
 
         [Fact]
@@ -62,6 +62,23 @@ namespace Task_4.Tests
 
            
             Assert.False(result);
+        }
+        [Fact]
+        public void order_with_just_one_item_can_be_completed()
+        {
+            services s= new services();
+            order o = new order(1, 10, false, new List<order_item> { new order_item("item1", 1, 10) }, DateTime.Now);
+
+            bool result = s.can_complete_order(o);
+            Assert.True(result);
+        }
+        [Fact]
+        public void empty_order_total_should_be_zero()
+        {
+            services se = new services();
+            order o=new order(1,5,true, new List<order_item>(), DateTime.Now);
+            bool ok = se.can_complete_order(o);
+            Assert.Equal(true, ok);
         }
     }
 }
