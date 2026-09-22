@@ -8,6 +8,9 @@ namespace TASK_4
 {
     internal class Program
     {
+        customer customer = new customer();
+        product product = new product();
+        order order = new order();
 
         static void Main(string[] args)
         {
