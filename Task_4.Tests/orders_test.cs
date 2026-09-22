@@ -97,5 +97,19 @@ namespace Task_4.Tests
 
 
         }
+        [Fact]
+        public void negative_product_price_should_be_rejected()
+        {
+            services s = new services();
+            product p = new product(1, "chair", -10, 5);
+            Assert.True(p.price < 0);
+        }
+        [Fact]
+        public void negative_product_stock_should_be_rejected()
+        {
+            services s = new services();
+            product p=new product(1, "table", 10, -5);
+            Assert.True(p.quantity < 0);
+        }
     }
 }
