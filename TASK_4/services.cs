@@ -347,8 +347,11 @@ namespace TASK_4
         }
         public float get_order_total(order selected_order)
         {
-            return selected_order.order_items
-                .Sum(item => item.unit_price * item.quantity);
+            return selected_order.order_items.Sum(item => item.unit_price * item.quantity);
+        }
+        public bool can_complete_order(order selected_order)
+        {
+            return selected_order != null &&selected_order.order_items != null &&selected_order.order_items.Count > 0;
         }
     }
 }
