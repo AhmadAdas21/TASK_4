@@ -8,13 +8,15 @@ namespace TASK_4
 {
     internal class Program
     {
-        customer customer = new customer();
-        product product = new product();
-        order order = new order();
-
+        /*    customer customer = new customer();
+            product product = new product();
+            order order = new order();
+        */
+     
         static void Main(string[] args)
         {
             int d;
+            services services = new services();
             bool ok = true;
             while (ok)
             {
@@ -44,34 +46,34 @@ namespace TASK_4
                 switch (d)
                 {
                     case 1:
-                        customer.add_customer();
+                        services.add_customer();
                         break;
                     case 2:
-                        customer.view_customers();
+                        services.view_customers();
                         break;
                     case 3:
-                        product.add_product();
+                        services.add_product();
                         break;
                     case 4:
-                        product.view_products();
+                        services.view_products();
                         break;
                     case 5:
-                        order.create_order();
+                        services.create_order();
                         break;
                     case 6:
-                        order_item.add_product_to_order();
+                        services.add_product_to_order();
                         break;
                     case 7:
-                        order.view_orders();
+                        services.view_orders();
                         break;
                     case 8:
-                        order.search_orders();
+                        services.search_orders();
                         break;
                     case 9:
-                        order.filter_orders_by_status();
+                        services.filter_orders_by_status();
                         break;
                     case 10:
-                        order.calculate_order_total();
+                        services.calculate_order_total();
                         break;
                     case 11:
                         ok = false;

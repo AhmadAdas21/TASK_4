@@ -142,6 +142,11 @@ namespace TASK_4
                     Console.WriteLine("invalid input, please enter a valid customer id");
                 }
             }
+            if (!customers.Any(c => c.id == customer_id))
+            {
+                Console.WriteLine("customer not found");
+                return;
+            }
             bool status;
             int st;
             Console.WriteLine("enter the status of order");
@@ -171,11 +176,18 @@ namespace TASK_4
                     Console.WriteLine("invalid input, please enter a valid status");
                 }
             }
+            DateTime noww = DateTime.Now;
+            order o = new order( idd,customer_id,status,new List<order_item>(),noww);
 
+            orders.Add(o);
+
+            Console.WriteLine("order created successfully");
 
         }
      public  void add_product_to_order()
         {
+            Console.WriteLine("you are in add product to order feature");
+
 
         }
        public void view_orders()
