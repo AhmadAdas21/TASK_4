@@ -349,9 +349,9 @@ namespace TASK_4
         {
             return selected_order.order_items.Sum(item => item.unit_price * item.quantity);
         }
-        public bool can_complete_order(order selected_order)
+        public bool can_complete_order(order order)
         {
-            return selected_order != null &&selected_order.order_items != null &&selected_order.order_items.Count > 0;
+            return (order != null &&order.order_items != null &&order.order_items.Count > 0);
         }
     }
 }

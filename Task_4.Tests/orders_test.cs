@@ -80,7 +80,22 @@ namespace Task_4.Tests
             int total = (int)se.get_order_total(o);
             Assert.Equal(0, total);
         }
-        //[Fact]
-       // public void 
+        [Fact]
+         public void adding_quantity_equal_to_stock_should_succeed_and_make_stock_zero()
+        {
+
+            product p = new product(1, "desk", 10, 5);
+            List<order_item> items = new List<order_item>()
+           {
+               new order_item("desk", 5, 10)
+           };
+
+           
+            services ser = new services();
+            order or = new order(1, 8, false, items, DateTime.Now);
+            Assert.Equal(5, p.quantity);
+
+
+        }
     }
 }
