@@ -76,9 +76,11 @@ namespace Task_4.Tests
         public void empty_order_total_should_be_zero()
         {
             services se = new services();
-            order o=new order(1,5,true, new List<order_item>(), DateTime.Now);
-            bool ok = se.can_complete_order(o);
-            Assert.Equal(true, ok);
+            order o=new order(1,5,true, new List<order_item>() { }, DateTime.Now);
+            int total = (int)se.get_order_total(o);
+            Assert.Equal(0, total);
         }
+        //[Fact]
+       // public void 
     }
 }
