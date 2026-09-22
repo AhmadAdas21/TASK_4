@@ -8,8 +8,34 @@ namespace TASK_4
 {
     internal class services:Iservices
     {
-     public   void add_customer()
+        List<customer> customers = new List<customer>();
+        List<order> orders = new List<order>();
+        List<product> products = new List<product>();
+        List<order_item> order_items = new List<order_item>();
+
+        public   void add_customer()
         {
+            Console.WriteLine("enter customer id");
+            int idd;
+            while (true)
+            {
+                if(int.TryParse(Console.ReadLine(), out idd))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("invalid input, please enter a valid customer id");
+                }
+            }
+            Console.WriteLine("enter customer name");
+            string name=Console.ReadLine();
+            Console.WriteLine("enter customer email");
+            string email = Console.ReadLine();
+            customer c = new customer(idd, name, email);
+
+            Console.WriteLine("the customer has been added successfully");
+
 
         }
      public   void view_customers()
