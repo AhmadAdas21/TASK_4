@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TASK_4
 {
-    internal class order
+    public class order
     {
         public int id { get; set; }
         public int customer_id { get; set; }

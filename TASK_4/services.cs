@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TASK_4
 {
-    internal class services:Iservices
+    public class services:Iservices
     {
         List<customer> customers = new List<customer>();
         List<order> orders = new List<order>();
@@ -344,6 +344,11 @@ namespace TASK_4
                 Console.WriteLine(idd);
                 Console.WriteLine(orders.FirstOrDefault(o => o.id == idd).order_items.Sum(x => x.unit_price * x.quantity));
             }
+        }
+        public float get_order_total(order selected_order)
+        {
+            return selected_order.order_items
+                .Sum(item => item.unit_price * item.quantity);
         }
     }
 }

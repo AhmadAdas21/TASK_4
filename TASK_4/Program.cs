@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TASK_4
 {
-    internal class Program
+    public class Program
     {
         /*    customer customer = new customer();
             product product = new product();

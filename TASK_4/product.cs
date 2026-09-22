@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TASK_4
 {
-    internal class product
+    public class product
     {
         public int id { get; set; }
         public string name { get; set; }
