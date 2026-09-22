@@ -77,7 +77,7 @@ namespace TASK_4
             float price;
             while (true)
             {
-                if(float.TryParse(Console.ReadLine(), out price))
+                if(float.TryParse(Console.ReadLine(), out price)&&price>0)
                 {
                     break;
                 }
@@ -90,7 +90,7 @@ namespace TASK_4
             int quantity;
             while (true)
             {
-                if(int.TryParse(Console.ReadLine(), out quantity))
+                if(int.TryParse(Console.ReadLine(), out quantity)&&quantity>0)
                 {
                     break;
                 }
@@ -233,7 +233,7 @@ namespace TASK_4
             Console.WriteLine("enter the quantity of product you want");
             while (true)
             {
-                if(int.TryParse(Console.ReadLine(), out quant))
+                if(int.TryParse(Console.ReadLine(), out quant) && quant > 0)
                 {
                     break;
                 }
