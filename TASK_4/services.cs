@@ -222,7 +222,7 @@ namespace TASK_4
                 Console.WriteLine("order not found");
                 return;
             }
-            product added = products.FirstOrDefault(o => o.id == order_id);
+            product added = products.FirstOrDefault(o => o.id == product_id);
 
             if (added == null)
             {
@@ -272,6 +272,7 @@ namespace TASK_4
                 if (int.TryParse(Console.ReadLine(),out idd ))
                 {
                     Console.WriteLine("valid input");
+                    break;
                 }
                 else
                 {
