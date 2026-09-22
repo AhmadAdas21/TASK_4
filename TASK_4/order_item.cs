@@ -8,11 +8,11 @@ namespace TASK_4
 {
     public class order_item
     {
-        public string product { get; set; }
+        public product product { get; set; }
 
         public int quantity { get; set; }
         public float unit_price { get; set; }
-        public order_item(string product, int quantity, float unit_price)
+        public order_item(product product, int quantity, float unit_price)
         {
             this.product = product;
             this.quantity = quantity;

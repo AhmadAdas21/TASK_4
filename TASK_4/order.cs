@@ -9,12 +9,12 @@ namespace TASK_4
     public class order
     {
         public int id { get; set; }
-        public int customer_id { get; set; }
+        public customer customer_id { get; set; }
         public bool status { get; set; }
         public List<order_item> order_items { get; set; }
         public DateTime created_date { get; set; }
 
-        public order(int id,int iddd,bool stauts, List<order_item> order_items, DateTime created_date)
+        public order(int id,customer iddd,bool stauts, List<order_item> order_items, DateTime created_date)
         {
             this.id = id;
             this.customer_id = iddd;

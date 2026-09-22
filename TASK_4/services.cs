@@ -115,6 +115,7 @@ namespace TASK_4
         }
 
       public  void create_order()
+
         {
             Console.WriteLine("you are in create order feature");
             int idd;
@@ -178,10 +179,12 @@ namespace TASK_4
                     Console.WriteLine("invalid input, please enter a valid status");
                 }
             }
+            customer customer =customers.FirstOrDefault(c => c.id == customer_id);
             DateTime noww = DateTime.Now;
-            order o = new order( idd,customer_id,status,new List<order_item>(),noww);
+            order o = new order( idd,customer,status,new List<order_item>(),noww);
 
             orders.Add(o);
+          //  Console.WriteLine(o.customer.id);
 
             Console.WriteLine("order created successfully");
 
@@ -248,7 +251,7 @@ namespace TASK_4
                 return;
             }
 
-            order_item item = new order_item(added.name, quant, added.price);
+            order_item item = new order_item(added, quant, added.price);
             selected.order_items.Add(item);
             added.quantity -= quant;
 
@@ -364,7 +367,7 @@ namespace TASK_4
                 return;
             }
 
-            order_item item = new order_item(p.name, quant, p.price);
+            order_item item = new order_item(p, quant, p.price);
 
             o.order_items.Add(item);
             p.quantity -= quant;
