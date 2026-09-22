@@ -43,14 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="customer.cs" />
-    <Compile Include="Iservices.cs" />
-    <Compile Include="order.cs" />
-    <Compile Include="order_item.cs" />
-    <Compile Include="product.cs" />
+    <Compile Include="models\customer.cs" />
+    <Compile Include="interface\Iservices.cs" />
+    <Compile Include="models\order.cs" />
+    <Compile Include="models\order_item.cs" />
+    <Compile Include="models\product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="services.cs" />
+    <Compile Include="services\services.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
