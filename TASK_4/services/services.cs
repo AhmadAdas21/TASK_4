@@ -30,16 +30,30 @@ namespace TASK_4
                     Console.WriteLine("invalid input, please enter a valid customer id");
                 }
             }
-            Console.WriteLine("enter customer name");
-            string name=Console.ReadLine();
-            Console.WriteLine("enter customer email");
-            string email = Console.ReadLine();
-            customer c = new customer(idd, name, email);
+            if (customers.Any(x => x.id == idd))
+            {
+                Console.WriteLine("the id of the customer already exist");
+            }
+            else
+            {
+                Console.WriteLine("enter customer name");
+                string name = Console.ReadLine();
+                Console.WriteLine("enter customer email");
+                string email = Console.ReadLine();
+                if (!customers.Any(x => x.email == email)) {
+                    customer c = new customer(idd, name, email);
 
-            Console.WriteLine("the customer has been added successfully");
-            customers.Add(c);
+                    Console.WriteLine("the customer has been added successfully");
+                    customers.Add(c);
+                }
+                else
+                {
+                    Console.WriteLine("the email of the customer already exist");
+                    return;
+                }
+                
 
-
+            }
         }
      public   void view_customers()
         {
@@ -407,9 +421,9 @@ namespace TASK_4
                 Console.WriteLine(orders.FirstOrDefault(o => o.id == idd).order_items.Sum(x => x.unit_price * x.quantity));
             }
         }
-        public float get_order_total(order selected_order)
+        public float get_order_total(order order)
         {
-            return selected_order.order_items.Sum(item => item.unit_price * item.quantity);
+            return order.order_items.Sum(item => item.unit_price * item.quantity);
         }
         public bool can_complete_order(order order)
         {
