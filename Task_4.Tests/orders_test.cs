@@ -133,14 +133,12 @@ namespace Task_4.Tests
         
         public void quantity_greater_than_stock_should_be_rejected()
         {
-            // Arrange
+            
             services s = new services();
             product p = new product(1, "apple", 1, 5);
             customer c = new customer(1, "ahmad", "ahmad@gmail.com");
 
-            order o = new order(
-                1, c, false, new List<order_item>(), DateTime.Now
-            );
+            order o = new order(1, c, false, new List<order_item>(), DateTime.Now);
 
             
             s.add_product_to_order(o, p, 10);
@@ -180,7 +178,7 @@ namespace Task_4.Tests
         [Fact]
         public void stock_should_decrease()
         {
-            // Arrange
+        
             services s = new services();
             customer c = new customer(2, "ahmad", "ahmad@gmail.com");
             product p = new product(1, "apple", 1, 5);
