@@ -64,10 +64,10 @@ namespace TASK_4
             }
             Console.WriteLine("the list is done");
 
-
+            // customers.ForEach(c => Console.WriteLine(c.id + " " + c.name + " " + c.email));
         }
 
-    public    void add_product()
+        public    void add_product()
         {
             int idd;
             Console.WriteLine("you are in add product feature");
@@ -85,6 +85,11 @@ namespace TASK_4
 
             }
             string name;
+            if(products.Any(x => x.id == idd))
+            {
+                Console.WriteLine("the product id already exist");
+                return;
+            }
             Console.WriteLine("enter the product name");
             name =Console.ReadLine();
             Console.WriteLine("enter the product price");
@@ -125,10 +130,10 @@ namespace TASK_4
                 Console.WriteLine(p.id+"       "+p.name+"        "+p.price+"   "+p.quantity);
             }
             Console.WriteLine("i have already provided you with the products list, thank you for using this feature");
-
+            //products.ForEach(p => Console.WriteLine(p.id + " " + p.name + " " + p.price + " " + p.quantity));
         }
 
-      public  void create_order()
+        public  void create_order()
 
         {
             Console.WriteLine("you are in create order feature");
@@ -235,13 +240,7 @@ namespace TASK_4
             }
 
          
-            order o = new order(
-                idd,
-                customer,
-                false,
-                new List<order_item>(),
-                DateTime.Now
-            );
+            order o = new order( idd,customer,false,new List<order_item>(),DateTime.Now);
 
            
             add_product_to_order(o, selected_product, quant);
